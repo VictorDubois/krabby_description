@@ -1,0 +1,23 @@
+<launch>
+	<!-- urdf xml robot description loaded on the Parameter Server, converting the xacro into a proper urdf file-->
+	<param name="robot_description" command="$(find xacro)/xacro '$(find krabby_description)/urdf/krabby.xacro'" />
+	<param name="campi_description" command="$(find xacro)/xacro '$(find krabby_description)/urdf/krabby_campi.xacro'" />
+
+	<!-- push robot_description to factory and spawn robot in gazebo -->
+	<node name="krabby_spawn" pkg="gazebo_ros" type="spawn_model" output="screen" args="-urdf -param robot_description -model krabby -x -1.25 -y 0.20 -z 1.0" />
+	<node name="campi_spawn" pkg="gazebo_ros" type="spawn_model" output="screen" args="-urdf -param campi_description -model krabby_camera -x -0 -y 0.2 -z 1.0" />
+
+	<include file="$(find eurobot2020_gazebo)/launch/eurobot.launch">
+		<arg name="world_type" value="full" />
+		<arg name="weathercock" value="south" />
+	</include>
+
+	<!-- convert static link into tf -->
+	<node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen">
+		<param name="robot_description" command="$(find xacro)/xacro '$(find krabby_description)/urdf/krabby.xacro'" />
+		<param name="tf_prefix"  value="/krabby"/>
+	</node>
+
+	<node name="rviz_krabby" pkg="rviz" type="rviz" args="-d $(find krabby_description)/rviz/viewer.rviz"/>
+
+</launch>

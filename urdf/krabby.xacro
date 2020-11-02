@@ -1,0 +1,154 @@
+<?xml version="1.0"?>
+<robot name="krabby"
+  xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:property name="PI" value="3.1415926535897931"/>
+
+  <xacro:property name="chassisHeight" value="0.005"/>
+  <xacro:property name="chassisLength" value="0.250"/>
+  <xacro:property name="chassisWidth" value="0.250"/>
+  <xacro:property name="chassisMass" value="2"/>
+
+  <xacro:property name="wheelWidth" value="0.008"/>
+  <xacro:property name="wheelRadius" value="0.032"/>
+  <xacro:property name="wheelXPos" value="0.08"/>
+  <xacro:property name="wheelMass" value="0.02"/>
+
+  <xacro:property name="casterWheelRadius" value="${wheelRadius/2-0.001}"/>
+  <xacro:property name="casterWheelMass" value="0.01"/>
+
+  <xacro:property name="cameraSize" value="0.05"/>
+  <xacro:property name="cameraMass" value="0.1"/>
+
+  <xacro:property name="lidarZPos" value="0.250"/>
+  <xacro:property name="lidarMass" value="0.1"/>
+  <xacro:property name="lidarRadius" value="0.05"/>
+  <xacro:property name="lidarHeight" value="0.01"/>
+
+  <xacro:property name="arucoSize" value="0.1"/>
+
+  <xacro:include filename="$(find krabby_description)/urdf/krabby.gazebo"/>
+  <xacro:include filename="$(find krabby_description)/urdf/materials.xacro"/>
+  <xacro:include filename="$(find krabby_description)/urdf/macros.xacro"/>
+
+  <link name="base_link"/>
+
+  <joint name="base_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="chassis"/>
+  </joint>
+
+  <link name='chassis'>
+    <collision>
+      <origin xyz="0 0 ${wheelRadius}" rpy="0 0 0"/>
+      <geometry>
+        <box size="${chassisLength} ${chassisWidth} ${chassisHeight}"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0 0 ${wheelRadius}" rpy="0 0 0"/>
+      <geometry>
+        <box size="${chassisLength} ${chassisWidth} ${chassisHeight}"/>
+      </geometry>
+      <material name="orange"/>
+    </visual>
+    <inertial>
+      <origin xyz="0 0 ${wheelRadius}" rpy="0 0 0"/>
+      <mass value="${chassisMass}"/>
+      <xacro:box_inertia m="${chassisMass}" x="${chassisLength}" y="${chassisWidth}" z="${chassisHeight}"/>
+    </inertial>
+  </link>
+
+  <link name="aruco_link">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.001"/>
+      <xacro:box_inertia m="0.001" x="${arucoSize}" y="${arucoSize}" z="0.001"/>
+    </inertial>
+
+    <collision name="tag_aruco_collision">
+      <pose>0 0 0 0 0 0</pose>
+      <geometry>
+        <box size="${arucoSize} ${arucoSize} 0.001"/>
+      </geometry>
+    </collision>
+
+    <visual name="tag_aruco_visual">
+      <pose>0 0 0 0 0 0</pose>
+      <geometry>
+        <mesh filename="package://eurobot2020_gazebo/models/tag_aruco/meshes/tag_aruco.dae"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <joint name="aruco_joint" type="fixed">
+    <origin xyz="0 0 0.325" rpy="0 0 0"/>
+    <parent link="chassis"/>
+    <child link="aruco_link"/>
+  </joint>
+
+  <link name="camera_link">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="${cameraSize} ${cameraSize} ${cameraSize}"/>
+      </geometry>
+    </collision>
+
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="${cameraSize} ${cameraSize} ${cameraSize}"/>
+      </geometry>
+      <material name="blue"/>
+    </visual>
+
+    <inertial>
+      <mass value="${cameraMass}" />
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <xacro:box_inertia m="${cameraMass}" x="${cameraSize}" y="${cameraSize}" z="${cameraSize}" />
+    </inertial>
+  </link>
+
+  <joint name="camera_joint" type="fixed">
+    <origin xyz="${-cameraSize+chassisLength/2} 0 ${cameraSize+wheelRadius+cameraSize/2}" rpy="0 0 0"/>
+    <parent link="chassis"/>
+    <child link="camera_link"/>
+  </joint>
+
+  <link name="neato_laser">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="${lidarHeight}" radius="${lidarRadius}"/>
+      </geometry>
+    </collision>
+
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="${lidarHeight}" radius="${lidarRadius}"/>
+      </geometry>
+      <material name="black"/>
+    </visual>
+
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="${lidarMass}"/>
+      <xacro:cylinder_inertia m="${lidarMass}" r="${lidarRadius}" h="${lidarHeight}"/>
+    </inertial>
+  </link>
+
+  <joint name="neato_laser" type="fixed">
+    <origin xyz="0 0 ${lidarZPos}" rpy="0 0 0"/>
+    <parent link="chassis"/>
+    <child link="neato_laser"/>
+  </joint>
+
+  <xacro:caster_wheel name="caster_wheel_upper_right" tX="${chassisLength/2 - 0.03}" tY="${chassisWidth/2 - 0.03}" />
+  <xacro:caster_wheel name="caster_wheel_upper_left" tX="${-(chassisLength/2 - 0.03)}" tY="${chassisWidth/2 - 0.03}" />
+  <xacro:caster_wheel name="caster_wheel_lower_right" tX="${chassisLength/2 - 0.03}" tY="${-(chassisWidth/2 - 0.03)}" />
+  <xacro:caster_wheel name="caster_wheel_lower_left" tX="${-(chassisLength/2 - 0.03)}" tY="${-(chassisWidth/2 - 0.03)}" />
+
+  <xacro:wheel lr="left" tY="${wheelXPos}"/>
+  <xacro:wheel lr="right" tY="${-wheelXPos}"/>
+</robot>

@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>krabby_description</name>
+  <version>0.0.0</version>
+  <description>The urdf description package for krabby robot</description>
+
+  <maintainer email="yanis.mazouz.ros@yanis.33mail.com">Yanis Mazouz</maintainer>
+
+  <license>MIT</license>
+
+  <depend>eurobot2020_gazebo</depend>
+  <depend>xacro</depend>
+  <depend>gazebo_ros</depend>
+  <depend>gazebo_plugins</depend>
+  <buildtool_depend>catkin</buildtool_depend>
+
+
+  <export>
+  </export>
+</package>

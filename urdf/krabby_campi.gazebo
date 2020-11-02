@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<robot name="krabby_campi"
+  xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <gazebo reference="camera_campi_link">
+    <material>Gazebo/Blue</material>
+    <sensor type="wideanglecamera" name="camera">
+      <update_rate>20.0</update_rate>
+      <camera name="camera">
+        <horizontal_fov>1.56</horizontal_fov>
+        <image>
+          <width>1280</width>
+          <height>960</height>
+          <format>R8G8B8</format>
+        </image>
+        <clip>
+          <near>0.02</near>
+          <far>300</far>
+        </clip>
+        <!-- Try to match the real camera -->
+        <distortion>
+          <k1>-5.0549140407333661e-03</k1>
+          <k2>-2.4842719783131604e-02</k2>
+          <k3>0.0</k3>
+          <p1>5.1720237886358780e-02</p1>
+          <p2>-2.3866705123954744e-02</p2>
+          <center>0.46 0.51</center>
+        </distortion>
+        <!-- A new section named `lens`. -->
+        <lens>
+          <!-- type element is mandatory -->
+          <type>custom</type>
+          <!-- manually defined mapping function r = c1*f*fun(theta/c2 + c3) -->
+          <!-- More information here: https://en.wikipedia.org/wiki/Fisheye_lens#Mapping_function -->
+          <custom_function>
+            <c1>1.05</c1>
+            <!-- linear scaling -->
+            <c2>4</c2>
+            <!-- angle scaling -->
+            <f>1.0</f>
+            <!-- one more scaling parameter -->
+            <fun>tan</fun>
+            <!-- one of sin,tan,id -->
+          </custom_function>
+          <!-- if it is set to `true` your horizontal FOV will ramain as defined -->
+          <!-- othervise it depends on lens type and custom function, if there is one -->
+          <scale_to_hfov>true</scale_to_hfov>
+          <!-- clip everything that is outside of this angle -->
+          <cutoff_angle>3.1415</cutoff_angle>
+          <!-- resolution of the cubemap texture, the highter it is - the sharper is your image -->
+          <env_texture_size>1024</env_texture_size>
+        </lens>
+      </camera>
+      <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+        <robotNamespace>campi</robotNamespace>
+        <alwaysOn>true</alwaysOn>
+        <updateRate>0.0</updateRate>
+        <cameraName>camera</cameraName>
+        <imageTopicName>image_raw</imageTopicName>
+        <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+        <frameName>camera_campi</frameName>
+        <hackBaseline>0.07</hackBaseline>
+        <distortionK1>-5.0549140407333661e-03</distortionK1>
+        <distortionK2>-2.4842719783131604e-02</distortionK2>
+        <distortionK3>0.0</distortionK3>
+        <distortionT1>5.1720237886358780e-02</distortionT1>
+        <distortionT2>-2.3866705123954744e-02</distortionT2>
+      </plugin>
+    </sensor>
+  </gazebo>
+</robot>
