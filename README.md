@@ -8,7 +8,12 @@
 
 # krabby_description
 ![Eurobot2020 simulation running][product-screenshot]
-This project contains the urdf files describing the krabby robot, a robot participating to [Eurobot 2020](https://www.eurobot.org/eurobot/eurobot-2020) (Sail the world) robotics competition.
+This project contains the urdf files describing the krabby robot, a robot participating to [Eurobot 2020](https://www.eurobot.org/eurobot/eurobot-2020) (Sail the world) robotics competition. The robot is actually two robots:
+### Campi Robot
+A camera mounted over the arena with a wide field of view
+
+### Krabby Robot
+A mobile base with two wheels, a lidar and a camera
 
 ## Prerequisites
 This project uses [ROS](https://www.ros.org/), [Gazebo](http://gazebosim.org/) and have a dependency on [eurobot2020](https://github.com/Scout22/eurobot2020_gazebo). It was tested with ROS Melodic and Gazebo v9.15 on Linux, but should work with more recent versions. 
