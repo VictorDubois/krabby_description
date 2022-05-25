@@ -85,7 +85,7 @@
         <gaussianNoise>0.005</gaussianNoise>
         <alwaysOn>true</alwaysOn>
         <updateRate>10.0</updateRate>
-        <topicName>scan</topicName>
+        <topicName>scan_obstacles</topicName>
         <frameName>neato_laser</frameName>
         <interface name="ros_ray_sensor_iface" />
         <robotNamespace>krabby</robotNamespace>
