@@ -118,7 +118,7 @@
     <child link="camera_link"/>
   </joint>
 
-  <link name="neato_laser">
+  <link name="tim_top">
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
@@ -141,10 +141,10 @@
     </inertial>
   </link>
 
-  <joint name="neato_laser" type="fixed">
+  <joint name="tim_top" type="fixed">
     <origin xyz="0 0 ${lidarZPos}" rpy="3.14159 0 0"/>
     <parent link="chassis"/>
-    <child link="neato_laser"/>
+    <child link="tim_top"/>
   </joint>
 
   <xacro:caster_wheel name="caster_wheel_upper_right" tX="${chassisLength/2 - 0.03}" tY="${chassisWidth/2 - 0.03}" />

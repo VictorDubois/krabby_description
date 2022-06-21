@@ -63,7 +63,7 @@
     </sensor>
   </gazebo>
 
-  <gazebo reference="neato_laser">
+  <gazebo reference="tim_top">
     <material>Gazebo/Black</material>
     <sensor name="lidar_xv11" type="ray">
       <ray>
@@ -86,7 +86,7 @@
         <alwaysOn>true</alwaysOn>
         <updateRate>10.0</updateRate>
         <topicName>scan_obstacles</topicName>
-        <frameName>neato_laser</frameName>
+        <frameName>tim_top</frameName>
         <interface name="ros_ray_sensor_iface" />
         <robotNamespace>krabby</robotNamespace>
       </plugin>
