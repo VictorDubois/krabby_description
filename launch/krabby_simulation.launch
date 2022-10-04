@@ -13,7 +13,7 @@
 	<node name="campi_spawn" pkg="gazebo_ros" type="spawn_model" output="screen" args="-urdf -param campi_description -model krabby_camera -x 0.1 -y 0.2 -z 1.0" unless="$(arg isBlue)"/>
 
 	<include file="$(find eurobot2020_gazebo)/launch/eurobot.launch">
-        <arg name="year" value="2022"/>
+        <arg name="year" value="2023"/>
 		<arg name="weathercock" value="north" />
         <arg name="world_type" value="full"/>
 	</include>
