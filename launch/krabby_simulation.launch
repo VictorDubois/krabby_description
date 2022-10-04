@@ -1,3 +1,4 @@
+<?xml version="1.0"?>
 <launch>
 	<!-- urdf xml robot description loaded on the Parameter Server, converting the xacro into a proper urdf file-->
 	<param name="robot_description" command="$(find xacro)/xacro '$(find krabby_description)/urdf/krabby.xacro'" />
@@ -18,11 +19,10 @@
 	</include>
 
 	<!-- convert static link into tf -->
-	<node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen">
+	<node ns="/krabby" name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen">
 		<param name="robot_description" command="$(find xacro)/xacro '$(find krabby_description)/urdf/krabby.xacro'" />
-		<param name="tf_prefix"  value="/krabby"/>
+		<param name="tf_prefix"  value="krabby"/>
 	</node>
 
 	<node name="rviz_krabby" pkg="rviz" type="rviz" args="-d $(find krabby_description)/rviz/viewer.rviz"/>
-
 </launch>

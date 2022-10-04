@@ -5,7 +5,6 @@
     <material>Gazebo/Orange</material>
   </gazebo>
 
-
   <gazebo>
     <plugin name="differential_drive_controller" filename="libgazebo_ros_diff_drive.so">
       <alwaysOn>true</alwaysOn>
@@ -17,14 +16,17 @@
       <wheelDiameter>${wheelRadius * 2}</wheelDiameter>
       <torque>20</torque>
       <wheelTorque>20</wheelTorque>
-      <commandTopic>cmd_vel</commandTopic>
-      <odometryTopic>odom</odometryTopic>
+      <commandTopic>/krabby/cmd_vel</commandTopic>
+      <odometryTopic>/krabby/odom</odometryTopic>
       <publishWheelTF>true</publishWheelTF>
       <publishWheelJointState>true</publishWheelJointState>
-      <odometryFrame>odom</odometryFrame>
-      <robotBaseFrame>base_link</robotBaseFrame>
+      <odometryFrame>krabby/odom</odometryFrame>
+      <robotBaseFrame>krabby/base_link</robotBaseFrame>
       <publishOdomTF>true</publishOdomTF>
-      <robotNamespace>krabby</robotNamespace>
+      <!--<robotNamespace>krabby</robotNamespace>-->
+      <!--<ros>
+        <namespace>/krabby</namespace>
+      </ros>-->
 
     </plugin>
   </gazebo>
