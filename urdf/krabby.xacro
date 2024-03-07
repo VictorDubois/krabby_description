@@ -29,9 +29,9 @@
 
   <xacro:property name="arucoSize" value="0.1"/>
 
-  <xacro:include filename="$(find krabby_description)/urdf/krabby.gazebo"/>
-  <xacro:include filename="$(find krabby_description)/urdf/materials.xacro"/>
-  <xacro:include filename="$(find krabby_description)/urdf/macros.xacro"/>
+  <xacro:include filename="krabby.gazebo"/>
+  <xacro:include filename="materials.xacro"/>
+  <xacro:include filename="macros.xacro"/>
 
   <link name="base_link"/>
 
