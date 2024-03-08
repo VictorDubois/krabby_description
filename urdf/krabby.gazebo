@@ -7,22 +7,22 @@
 
   <gazebo>
     <plugin name="differential_drive_controller" filename="libgazebo_ros_diff_drive.so">
-      <alwaysOn>true</alwaysOn>
-      <legacyMode>false</legacyMode>
-      <updateRate>20</updateRate>
-      <leftJoint>left_wheel_hinge</leftJoint>
-      <rightJoint>right_wheel_hinge</rightJoint>
-      <wheelSeparation>${wheelXPos * 2}</wheelSeparation>
-      <wheelDiameter>${wheelRadius * 2}</wheelDiameter>
+      <always_on>true</always_on>
+      <legacy_mode>false</legacy_mode>
+      <update_rate>20</update_rate>
+      <left_joint>left_wheel_hinge</left_joint>
+      <right_joint>right_wheel_hinge</right_joint>
+      <wheel_separation>${wheelXPos * 2}</wheel_separation>
+      <wheel_diameter>${wheelRadius * 2}</wheel_diameter>
       <torque>20</torque>
-      <wheelTorque>20</wheelTorque>
-      <commandTopic>/krabby/cmd_vel</commandTopic>
-      <odometryTopic>/krabby/odom</odometryTopic>
-      <publishWheelTF>true</publishWheelTF>
-      <publishWheelJointState>true</publishWheelJointState>
-      <odometryFrame>krabby/odom</odometryFrame>
-      <robotBaseFrame>krabby/base_link</robotBaseFrame>
-      <publishOdomTF>true</publishOdomTF>
+      <wheel_torque>20</wheel_torque>
+      <command_topic>/krabby/cmd_vel</command_topic>
+      <odometry_topic>/krabby/odom</odometry_topic>
+      <publish_wheel_tf>true</publish_wheel_tf>
+      <publish_wheel_joint_state>true</publish_wheel_joint_state>
+      <odometry_frame>krabby/odom</odometry_frame>
+      <robot_base_frame>krabby/base_link</robot_base_frame>
+      <publish_odom_tf>true</publish_odom_tf>
       <!--<robotNamespace>krabby</robotNamespace>-->
       <!--<ros>
         <namespace>/krabby</namespace>

@@ -42,12 +42,38 @@ def generate_launch_description():
               executable='robot_state_publisher',
               output='both',
               parameters=[rsp_params])
+  isBlue_value = LaunchConfiguration('isBlue')
+  xRobotPos_value = LaunchConfiguration('xRobotPos')
+  yRobotPos_value = LaunchConfiguration('yRobotPos')
+  zRobotOrientation_value = LaunchConfiguration('zRobotOrientation')
   
-  krabby_spawn_params = {'-entity': "krabby"}
+  isBlue_launch_arg = DeclareLaunchArgument(
+    'isBlue',
+    default_value='false'
+  )
+  xRobotPos_launch_arg = DeclareLaunchArgument(
+    'xRobotPos',
+    default_value='1.25'
+  )
+  yRobotPos_launch_arg = DeclareLaunchArgument(
+    'yRobotPos',
+    default_value='0.0'
+  )
+  zRobotOrientation_launch_arg = DeclareLaunchArgument(
+    'zRobotOrientation',
+    default_value='0.0'
+  )
+
+  
+
   krabby_spawn = Node(package='gazebo_ros',
               executable='spawn_entity.py',
               output='both',
-              parameters=[krabby_spawn_params])#"-urdf -param robot_description -entity krabby -x $(arg xRobotPos) -y $(arg yRobotPos) -z 1.0 -Y $(arg zRobotOrientation)"])
+              arguments=['-topic', 'robot_description',
+                                   '-entity', 'krabby', 
+                                   "-x", xRobotPos_value, "-y", yRobotPos_value, '-z', '1.1', "-Y", zRobotOrientation_value ]
+              #parameters=[krabby_spawn_params]#"-urdf -param robot_description -entity krabby -x $(arg xRobotPos) -y $(arg yRobotPos) -z 1.0 -Y $(arg zRobotOrientation)"])
+  )
   
 
   ########### YOU DO NOT NEED TO CHANGE ANYTHING BELOW THIS LINE ##############  
@@ -100,7 +126,7 @@ def generate_launch_description():
   )
  
   # Create the launch description and populate
-  ld = LaunchDescription()#krabby_state_pub_node)
+  ld = LaunchDescription([isBlue_launch_arg, xRobotPos_launch_arg, yRobotPos_launch_arg, zRobotOrientation_launch_arg])#krabby_state_pub_node)
 
 
   # Declare the launch options
@@ -110,7 +136,7 @@ def generate_launch_description():
   ld.add_action(declare_world_cmd)
   #ld.add_action(krabby_state_pub_node)
   ld.add_action(rsp)
-  #ld.add_action(krabby_spawn)# @todo uncomment when it works
+  ld.add_action(krabby_spawn)
  
   # Add any actions
   ld.add_action(start_gazebo_server_cmd)
