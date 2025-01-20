@@ -13,7 +13,7 @@
         <inertia ixx="${2*m*r*r/5}" ixy="0" ixz="0" iyy="${2*m*r*r/5}" iyz="0" izz="${2*m*r*r/5}" />
     </xacro:macro>
 
-    <xacro:macro name="wheel" params="lr tY">
+    <xacro:macro name="wheel" params="lr parent tX:=0 tY:=0 tZ:=0">
 
         <link name="${lr}_wheel">
             <collision>
@@ -52,9 +52,9 @@
 
 
         <joint name="${lr}_wheel_hinge" type="continuous">
-            <parent link="chassis"/>
+            <parent link="${parent}"/>
             <child link="${lr}_wheel"/>
-            <origin xyz="0 ${tY} ${wheelRadius}" rpy="0 0 0"/>
+            <origin xyz="${tX} ${tY} ${tZ}" rpy="0 0 0"/>
             <axis xyz="0 1 0" rpy="0 0 0"/>
             <limit effort="100" velocity="100"/>
             <joint_properties damping="0.0" friction="0.0"/>
@@ -74,17 +74,17 @@
 
     </xacro:macro>
 
-    <xacro:macro name="caster_wheel" params="name tX tY">
+    <xacro:macro name="caster_wheel" params="parent name tX tY">
         <link name="${name}">
             <collision>
-                <origin xyz="${tX} ${tY} ${casterWheelRadius}" rpy="0 0 0"/>
+                <origin xyz="${tX} ${tY} 0" rpy="0 0 0"/>
                 <geometry>
                     <sphere radius="${casterWheelRadius}"/>
                 </geometry>
             </collision>
 
             <visual>
-                <origin xyz="${tX} ${tY} ${casterWheelRadius}" rpy="0 0 0"/>
+                <origin xyz="${tX} ${tY} 0" rpy="0 0 0"/>
                 <geometry>
                     <sphere radius="${casterWheelRadius}"/>
                 </geometry>
@@ -97,8 +97,8 @@
                 <xacro:sphere_inertia m="${casterWheelMass}" r="${casterWheelRadius}"/>
             </inertial>
         </link>
-        <joint name="${name}" type="fixed">
-            <parent link="chassis"/>
+        <joint name="${name}_joint" type="fixed">
+            <parent link="${parent}"/>
             <child link="${name}"/>
         </joint>
         <gazebo reference="${name}">
@@ -107,4 +107,5 @@
             <material>Gazebo/Red</material>
         </gazebo>
     </xacro:macro>
+
 </robot>

@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<robot name="krabby" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:property name="PI" value="3.1415926535897931"/>
+
+  <xacro:property name="chassisDistanceAuSol" value="0.005"/>
+
+  <!-- Chassis -->
+  <xacro:property name="chassisLength" value="0.210"/>
+  <xacro:property name="chassisWidth" value="0.230"/>
+  <xacro:property name="chassisHeight" value="0.004"/>
+
+  <xacro:property name="chassisMass" value="3"/>
+
+  <!-- body -->
+  <xacro:property name="bodyOffsetX" value="-0.020"/>
+  <xacro:property name="bodyOffsetY" value="0.000"/>
+  <xacro:property name="bodyOffsetZ" value="0.150"/>
+
+  <xacro:property name="bodyLength" value="0.170"/>
+  <xacro:property name="bodyWidth" value="0.230"/>
+  <xacro:property name="bodyHeight" value="0.300"/>
+
+  <xacro:property name="bodyMass" value="1"/>
+
+
+  <!-- wheels -->
+  <xacro:property name="wheelWidth" value="0.008"/>
+  <xacro:property name="wheelRadius" value="0.030"/>
+  <xacro:property name="wheelXOffset" value="-0.018"/>
+  <xacro:property name="wheelYOffset" value="0.062"/>
+  <xacro:property name="wheelZOffset" value="0.025"/>
+  <xacro:property name="wheelMass" value="0.02"/>
+
+  <!-- caster wheels -->
+  <xacro:property name="casterXOffset" value="0.100"/>
+  <xacro:property name="casterYOffset" value="0.100"/>
+  <xacro:property name="casterZOffset" value="0.000"/>
+  <xacro:property name="casterWheelRadius" value="0.005"/>
+  <xacro:property name="casterWheelMass" value="0.01"/>
+
+
+  <!-- lidar -->
+  <xacro:property name="lidarZPos" value="0.3"/>
+  <xacro:property name="lidarMass" value="0.1"/>
+  <xacro:property name="lidarRadius" value="0.05"/>
+  <xacro:property name="lidarHeight" value="0.01"/>
+
+  <!-- camera -->
+  <xacro:property name="cameraSize" value="0.05"/>
+  <xacro:property name="cameraMass" value="0.1"/>
+
+  <!-- aruco -->
+  <xacro:property name="arucoSize" value="0.1"/>
+</robot>

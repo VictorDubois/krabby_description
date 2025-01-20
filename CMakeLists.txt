@@ -15,7 +15,7 @@ find_package(ament_cmake REQUIRED)
 install(DIRECTORY launch
   DESTINATION share/${PROJECT_NAME})
 
-install(DIRECTORY urdf
+install(DIRECTORY urdf params
   DESTINATION share/${PROJECT_NAME})
 
 #ament_environment_hooks("${CMAKE_CURRENT_SOURCE_DIR}/env-hooks/env_variables.bash")

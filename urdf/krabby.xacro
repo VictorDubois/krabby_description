@@ -1,66 +1,125 @@
 <?xml version="1.0"?>
 <robot name="krabby"
   xmlns:xacro="http://www.ros.org/wiki/xacro">
-  <xacro:property name="PI" value="3.1415926535897931"/>
 
-  <xacro:property name="chassisHeight" value="0.005"/>
-  <xacro:property name="chassisLength" value="0.250"/>
-  <xacro:property name="chassisWidth" value="0.250"/>
-  <xacro:property name="chassisMass" value="2"/>
-
-  <xacro:property name="wheelWidth" value="0.008"/>
-  <xacro:property name="wheelRadius" value="0.032"/>
-  <xacro:property name="wheelXPos" value="0.08"/>
-  <xacro:property name="wheelMass" value="0.02"/>
-
-  <xacro:property name="casterWheelRadius" value="${wheelRadius/2-0.001}"/>
-  <xacro:property name="casterWheelMass" value="0.01"/>
-
-  <xacro:property name="cameraSize" value="0.05"/>
-  <xacro:property name="cameraMass" value="0.1"/>
-
-  <xacro:property name="lidarZPos" value="0.3"/>
-  <!-- mapping
-    <xacro:property name="lidarZPos" value="0.06"/>
-  -->
-  <xacro:property name="lidarMass" value="0.1"/>
-  <xacro:property name="lidarRadius" value="0.05"/>
-  <xacro:property name="lidarHeight" value="0.01"/>
-
-  <xacro:property name="arucoSize" value="0.1"/>
-
-  <xacro:include filename="krabby.gazebo"/>
+  <xacro:include filename="properties.xacro"/>
   <xacro:include filename="materials.xacro"/>
+  <xacro:include filename="krabby.gazebo"/>
   <xacro:include filename="macros.xacro"/>
 
   <link name="base_link"/>
 
+  <!-- ************************************************************** -->
+  <!-- chassis                                                        -->
+  <!-- ************************************************************** -->
   <joint name="base_joint" type="fixed">
     <parent link="base_link"/>
     <child link="chassis"/>
+    <origin xyz="0 0 ${chassisDistanceAuSol}" rpy="0 0 0"/>
   </joint>
 
   <link name='chassis'>
     <collision>
-      <origin xyz="0 0 ${wheelRadius}" rpy="0 0 0"/>
       <geometry>
         <box size="${chassisLength} ${chassisWidth} ${chassisHeight}"/>
       </geometry>
     </collision>
     <visual>
-      <origin xyz="0 0 ${wheelRadius}" rpy="0 0 0"/>
       <geometry>
         <box size="${chassisLength} ${chassisWidth} ${chassisHeight}"/>
       </geometry>
       <material name="orange"/>
     </visual>
     <inertial>
-      <origin xyz="0 0 ${wheelRadius}" rpy="0 0 0"/>
       <mass value="${chassisMass}"/>
       <xacro:box_inertia m="${chassisMass}" x="${chassisLength}" y="${chassisWidth}" z="${chassisHeight}"/>
     </inertial>
   </link>
 
+  <!-- ************************************************************** -->
+  <!-- body                                                        -->
+  <!-- ************************************************************** -->
+  <joint name="body_joint" type="fixed">
+    <parent link="chassis"/>
+    <child link="body"/>
+    <origin xyz="${bodyOffsetX} ${bodyOffsetY} ${bodyOffsetZ}"/>
+  </joint>
+
+  <link name='body'>
+    <collision>
+      <geometry>
+        <box size="${bodyLength} ${bodyWidth} ${bodyHeight}"/>
+      </geometry>
+    </collision>
+    <visual>
+      <geometry>
+        <box size="${bodyLength} ${bodyWidth} ${bodyHeight}"/>
+      </geometry>
+      <material name="blue"/>
+    </visual>
+    <inertial>
+      <mass value="${bodyMass}"/>
+      <xacro:box_inertia m="${bodyMass}" x="${bodyLength}" y="${bodyWidth}" z="${bodyHeight}"/>
+    </inertial>
+  </link>
+
+  <!-- ************************************************************** -->
+  <!-- wheels                                                      -->
+  <!-- ************************************************************** -->
+  <xacro:wheel lr="left" parent="chassis" tX="${wheelXOffset}" tY="${wheelYOffset}" tZ="${wheelZOffset}"/>
+  <xacro:wheel lr="right" parent="chassis" tX="${wheelXOffset}" tY="${-wheelYOffset}" tZ="${wheelZOffset}"/>
+
+  <xacro:caster_wheel parent="chassis" name="caster_fr" tX="${casterXOffset}" tY="-${casterYOffset}"/>
+  <xacro:caster_wheel parent="chassis" name="caster_fl" tX="${casterXOffset}" tY="${casterYOffset}"/>
+  <xacro:caster_wheel parent="chassis" name="caster_rr" tX="-${casterXOffset}" tY="-${casterYOffset}"/>
+  <xacro:caster_wheel parent="chassis" name="caster_rl" tX="-${casterXOffset}" tY="${casterYOffset}"/>
+
+  <!-- ************************************************************** -->
+  <!-- lidar                                                           -->
+  <!-- ************************************************************** -->
+  <joint name="lidar_joint" type="fixed">
+    <parent link="body"/>
+    <child link="lidar"/>
+    <origin xyz="0 0 ${lidarZPos}"/>
+  </joint>
+
+  <link name='lidar'>
+    <inertial>
+      <mass value="${lidarMass}"/>
+      <xacro:cylinder_inertia m="${lidarMass}" r="${lidarRadius}" h="${lidarHeight}"/>
+    </inertial>
+
+    <!-- No collision on purpose, to not block lidar rays in simulation -->
+
+    <!-- <collision name="lidar_collision"> -->
+    <!--   <pose>0 0 0 0 0 0</pose> -->
+    <!--   <geometry> -->
+    <!--     <cylinder length="${lidarHeight}" radius="${lidarRadius}"/> -->
+    <!--   </geometry> -->
+    <!-- </collision> -->
+
+    <visual name="lidar_visual">
+      <pose>0 0 0 0 0 0</pose>
+      <geometry>
+        <cylinder length="${lidarHeight}" radius="${lidarRadius}"/>
+      </geometry>
+      <material name="black"/>
+    </visual>
+
+  </link>
+
+
+  <!-- ************************************************************** -->
+  <!-- camera                                                           -->
+  <!-- ************************************************************** -->
+
+  <!-- ************************************************************** -->
+  <!-- aruco                                                           -->
+  <!-- ************************************************************** -->
+
+  <!-- ************************************************************** -->
+  <!-- the following is optional, not corrected yet                    -->
+  <!-- ************************************************************** -->
   <link name="aruco_link">
     <inertial>
       <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -141,17 +200,10 @@
     </inertial>
   </link>
 
-  <joint name="tim_top" type="fixed">
+  <joint name="tim_top_joint" type="fixed">
     <origin xyz="0 0 ${lidarZPos}" rpy="3.14159 0 0"/>
     <parent link="chassis"/>
     <child link="tim_top"/>
   </joint>
 
-  <xacro:caster_wheel name="caster_wheel_upper_right" tX="${chassisLength/2 - 0.03}" tY="${chassisWidth/2 - 0.03}" />
-  <xacro:caster_wheel name="caster_wheel_upper_left" tX="${-(chassisLength/2 - 0.03)}" tY="${chassisWidth/2 - 0.03}" />
-  <xacro:caster_wheel name="caster_wheel_lower_right" tX="${chassisLength/2 - 0.03}" tY="${-(chassisWidth/2 - 0.03)}" />
-  <xacro:caster_wheel name="caster_wheel_lower_left" tX="${-(chassisLength/2 - 0.03)}" tY="${-(chassisWidth/2 - 0.03)}" />
-
-  <xacro:wheel lr="left" tY="${wheelXPos}"/>
-  <xacro:wheel lr="right" tY="${-wheelXPos}"/>
 </robot>
