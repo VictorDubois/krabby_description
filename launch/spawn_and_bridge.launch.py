@@ -6,6 +6,8 @@ from launch.launch_description_sources import PythonLaunchDescriptionSource
 import xacro
 from ament_index_python.packages import get_package_share_directory
 import os
+from launch_ros.actions import Node, PushRosNamespace
+
 
 def get_robot_description_string(pkg):
     xacro_filepath = os.path.join(pkg, "urdf", "krabby.xacro")
@@ -28,13 +30,19 @@ def generate_launch_description():
         launch_arguments=[
             ('bridge_name', 'gz_bridge'),
             ('model_string', robot_desc),
-            # ('x', 1.23), # can be used to define the full pose (xyzRPY)
+            #('x', "0.5"), # can be used to define the full pose (xyzRPY)
             ('config_file', bridge_config_file),
         ])
 
-    # arams/gz_bridge.yaml"/>
 
+    krabby_state_pub_node = Node(
+        package='robot_state_publisher',
+        executable='robot_state_publisher',
+        name='robot_state_publisher',
+        output='screen',
+        parameters=[{'use_sim_time': True, "robot_description": robot_desc}]
+    )
 
-    ld = launch.LaunchDescription()
+    ld = launch.LaunchDescription([krabby_state_pub_node])
     ld.add_action(ros_gz_spawn)
     return ld
