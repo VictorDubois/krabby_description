@@ -51,9 +51,15 @@
         <box size="${bodyLength} ${bodyWidth} ${bodyHeight}"/>
       </geometry>
     </collision>
+    <!--Kraboss_base_assembly_For_Simu_v1.stl-->
     <visual>
       <geometry>
-        <box size="${bodyLength} ${bodyWidth} ${bodyHeight}"/>
+        <!--<origin xyz="0 ${chassisWidth}/2 ${chassisDistanceAuSol}" rpy="0 0 0"/>-->
+        <!--<mesh><uri>file://Kraboss_base_assembly_For_Simu_v1.stl</uri></mesh>-->
+        <!--<pose>0 ${chassisWidth}/2 0 0 -0 0</pose>-->
+        <mesh scale="0.001 0.001 0.001" filename="file://$(find krabby_description)/models/Kraboss_base_assembly_For_Simu_v1.stl"/>
+        <!--<mesh scale="0.001 0.001 0.001" filename="file://$(find krabby_description)/models/Kraboss_base_assembly_For_Simu_v1.dae"/>-->
+        <!--<box size="${bodyLength} ${bodyWidth} ${bodyHeight}"/>-->
       </geometry>
       <material name="blue"/>
     </visual>
