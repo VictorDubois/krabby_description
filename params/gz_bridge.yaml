@@ -23,7 +23,7 @@
   direction: GZ_TO_ROS
 
 - gz_topic_name: "/lidar/points"
-  ros_topic_name: "/krabi_ns/scan_obstacles"
+  ros_topic_name: "/krabi_ns/scan_obstaclesPC2"
   gz_type_name: "gz.msgs.PointCloudPacked"
   ros_type_name: "sensor_msgs/msg/PointCloud2"
   direction: GZ_TO_ROS

@@ -57,7 +57,7 @@
       </lidar>
       <always_on>true</always_on>
       <visualize>true</visualize>
-      <gz_frame_id>lidar</gz_frame_id>
+      <gz_frame_id>ldlidar_top</gz_frame_id>
     </sensor>
   </gazebo>
 
