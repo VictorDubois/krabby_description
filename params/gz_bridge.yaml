@@ -16,14 +16,27 @@
   ros_type_name: "tf2_msgs/msg/TFMessage"
   direction: GZ_TO_ROS
 
-- gz_topic_name: "/lidar"
+- gz_topic_name: "/lidarObstacles"
   ros_topic_name: "/krabi_ns/scan_obstacles"
   gz_type_name: "gz.msgs.LaserScan"
   ros_type_name: "sensor_msgs/msg/LaserScan"
   direction: GZ_TO_ROS
 
-- gz_topic_name: "/lidar/points"
+- gz_topic_name: "/lidarObstacles/points"
   ros_topic_name: "/krabi_ns/scan_obstaclesPC2"
   gz_type_name: "gz.msgs.PointCloudPacked"
   ros_type_name: "sensor_msgs/msg/PointCloud2"
   direction: GZ_TO_ROS
+
+- gz_topic_name: "/lidarLoc"
+  ros_topic_name: "/krabi_ns/scan_loc"
+  gz_type_name: "gz.msgs.LaserScan"
+  ros_type_name: "sensor_msgs/msg/LaserScan"
+  direction: GZ_TO_ROS
+
+- gz_topic_name: "/lidarLoc/points"
+  ros_topic_name: "/krabi_ns/scan_locPC2"
+  gz_type_name: "gz.msgs.PointCloudPacked"
+  ros_type_name: "sensor_msgs/msg/PointCloud2"
+  direction: GZ_TO_ROS
+

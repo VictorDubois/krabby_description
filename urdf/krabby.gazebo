@@ -30,9 +30,9 @@
       </plugin>
   </gazebo>
   
-  <gazebo reference="lidar">
+  <gazebo reference="ldlidar_top">
     <sensor name='gpu_lidar' type='gpu_lidar'>
-      <topic>lidar</topic>
+      <topic>lidarObstacles</topic>
       <update_rate>10</update_rate>
       <lidar>
         <scan>
@@ -58,6 +58,37 @@
       <always_on>true</always_on>
       <visualize>true</visualize>
       <gz_frame_id>ldlidar_top</gz_frame_id>
+    </sensor>
+  </gazebo>
+
+  <gazebo reference="tim_lidar_bottom">
+    <sensor name='gpu_lidar_bottom' type='gpu_lidar'>
+      <topic>lidarLoc</topic>
+      <update_rate>10</update_rate>
+      <lidar>
+        <scan>
+          <horizontal>
+            <samples>360</samples>
+            <resolution>1</resolution>
+            <min_angle>-3.14</min_angle>
+            <max_angle>3.14</max_angle>
+          </horizontal>
+          <vertical>
+            <samples>1</samples>
+            <resolution>1</resolution>
+            <min_angle>0</min_angle>
+            <max_angle>0</max_angle>
+          </vertical>
+        </scan>
+        <range>
+          <min>0.08</min>
+          <max>10.0</max>
+          <resolution>0.01</resolution>
+        </range>
+      </lidar>
+      <always_on>true</always_on>
+      <visualize>true</visualize>
+      <gz_frame_id>tim_lidar_bottom</gz_frame_id>
     </sensor>
   </gazebo>
 

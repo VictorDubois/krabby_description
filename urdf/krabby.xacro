@@ -46,11 +46,11 @@
   </joint>
 
   <link name='body'>
-    <collision>
+    <!--<collision>
       <geometry>
         <box size="${bodyLength} ${bodyWidth} ${bodyHeight}"/>
       </geometry>
-    </collision>
+    </collision>-->
     <!--Kraboss_base_assembly_For_Simu_v1.stl-->
     <visual>
       <geometry>
@@ -81,12 +81,12 @@
   <xacro:caster_wheel parent="chassis" name="caster_rl" tX="-${casterXOffset}" tY="${casterYOffset}"/>
 
   <!-- ************************************************************** -->
-  <!-- lidar                                                           -->
+  <!-- lidar (exemple, not used)                                      -->
   <!-- ************************************************************** -->
   <joint name="lidar_joint" type="fixed">
     <parent link="body"/>
     <child link="lidar"/>
-    <origin xyz="0 0 ${lidarZPos}"/>
+    <origin xyz="0 0 ${lidarLD06_topZPos}"/>
   </joint>
 
   <link name='lidar'>
@@ -113,7 +113,6 @@
     </visual>
 
   </link>
-
 
   <!-- ************************************************************** -->
   <!-- camera                                                           -->
@@ -183,13 +182,18 @@
     <child link="camera_link"/>
   </joint>
 
+  <!-- ************************************************************** -->
+  <!-- lidar_top (LD06)                                               -->
+  <!-- ************************************************************** -->
+
   <link name="ldlidar_top">
-    <collision>
+    <!-- No collision on purpose, to not block lidar rays in simulation -->
+    <!--<collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
         <cylinder length="${lidarHeight}" radius="${lidarRadius}"/>
       </geometry>
-    </collision>
+    </collision>-->
 
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -207,18 +211,23 @@
   </link>
 
   <joint name="ldlidar_top_joint" type="fixed">
-    <origin xyz="0 0 ${lidarZPos}" rpy="0 0 0"/>
+    <origin xyz="0 0 ${lidarLD06_topZPos}" rpy="0 0 0"/>
     <parent link="chassis"/>
     <child link="ldlidar_top"/>
   </joint>
 
-  <link name="tim_top">
-    <collision>
+  <!-- ************************************************************** -->
+  <!-- lidar_bottom (TIM) for localisation on borders                 -->
+  <!-- ************************************************************** -->
+
+  <link name="tim_lidar_bottom">
+    <!-- No collision on purpose, to not block lidar rays in simulation -->
+    <!--<collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
         <cylinder length="${lidarHeight}" radius="${lidarRadius}"/>
       </geometry>
-    </collision>
+    </collision>-->
 
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -235,10 +244,11 @@
     </inertial>
   </link>
 
-  <joint name="tim_top_joint" type="fixed">
-    <origin xyz="0 0 ${lidarZPos}" rpy="3.14159 0 0"/>
+  <joint name="tim_lidar_bottom_joint" type="fixed">
+    <origin xyz="${lidarTIM_bottom_XPos} ${lidarTIM_bottom_YPos} ${lidarTIM_bottom_ZPos}" rpy="0 0 ${lidarTIM_bottom_Yaw}"/>
     <parent link="chassis"/>
-    <child link="tim_top"/>
+    <child link="tim_lidar_bottom"/>
   </joint>
+
 
 </robot>
