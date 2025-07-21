@@ -84,7 +84,7 @@
   <!-- lidar (exemple, not used)                                      -->
   <!-- ************************************************************** -->
   <joint name="lidar_joint" type="fixed">
-    <parent link="body"/>
+    <parent link="chassis"/>
     <child link="lidar"/>
     <origin xyz="0 0 ${lidarLD06_topZPos}"/>
   </joint>
