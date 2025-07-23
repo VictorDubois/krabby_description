@@ -92,10 +92,15 @@
     </sensor>
   </gazebo>
 
-  <!--<gazebo reference="camera_link">
+
+  <gazebo reference="camera_link">
     <material>Gazebo/Blue</material>
     <sensor type="camera" name="camera">
+      <always_on>true</always_on>
+      <visualize>true</visualize>
       <update_rate>5.0</update_rate>
+      <topic>camera/image_raw</topic>
+      <gz_frame_id>camera_rgb_frame</gz_frame_id>
       <camera name="head">
         <horizontal_fov>1.3962634</horizontal_fov>
         <image>
@@ -108,52 +113,6 @@
           <far>300</far>
         </clip>
       </camera>
-      <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
-        <always_on>true</always_on>
-        <update_rate>0.0</update_rate>
-        <robot_namespace>krabby</robot_namespace>
-        <camera_name>camera</camera_name>
-        <image_topic_name>image_raw</image_topic_name>
-        <camera_info_topic_name>camera_info</camera_info_topic_name>
-        <frame_name>camera_link</frame_name>
-        <hack_baseline>0.07</hack_baseline>
-        <distortion_K1>0.0</distortion_K1>
-        <distortion_K2>0.0</distortion_K2>
-        <distortion_K3>0.0</distortion_K3>
-        <distortion_T1>0.0</distortion_T1>
-        <distortion_T2>0.0</distortion_T2>
-      </plugin>
     </sensor>
   </gazebo>
-
-  <gazebo reference="tim_top">
-    <material>Gazebo/Black</material>
-    <sensor name="lidar" type="ray">
-      <ray>
-        <scan>
-          <horizontal>
-            <samples>360</samples>
-            <resolution>1</resolution>
-            <min_angle>0</min_angle>
-            <max_angle>6.28</max_angle>
-          </horizontal>
-        </scan>
-        <range>
-          <min>0.08</min>
-          <max>10</max>
-          <resolution>0.01</resolution>
-        </range>
-      </ray>
-      <plugin filename="libgazebo_ros_laser.so" name="ros_ray_sensor_controller">
-        <gaussian_noise>0.005</gaussian_noise>
-        <always_on>true</always_on>
-        <update_rate>10.0</update_rate>
-        <topic_name>scan_obstacles</topic_name>
-        <frame_name>tim_top</frame_name>
-        <interface name="ros_ray_sensor_iface" />
-        <robot_namespace>krabby</robot_namespace>
-      </plugin>
-      <visualize>true</visualize>
-    </sensor>
-  </gazebo>-->
 </robot>
