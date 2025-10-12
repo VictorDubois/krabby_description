@@ -6,35 +6,101 @@
   </gazebo>
 
   <gazebo>
-    <plugin name="differential_drive_controller" filename="libgazebo_ros_diff_drive.so">
-      <alwaysOn>true</alwaysOn>
-      <legacyMode>false</legacyMode>
-      <updateRate>20</updateRate>
-      <leftJoint>left_wheel_hinge</leftJoint>
-      <rightJoint>right_wheel_hinge</rightJoint>
-      <wheelSeparation>${wheelXPos * 2}</wheelSeparation>
-      <wheelDiameter>${wheelRadius * 2}</wheelDiameter>
-      <torque>20</torque>
-      <wheelTorque>20</wheelTorque>
-      <commandTopic>/krabby/cmd_vel</commandTopic>
-      <odometryTopic>/krabby/odom</odometryTopic>
-      <publishWheelTF>true</publishWheelTF>
-      <publishWheelJointState>true</publishWheelJointState>
-      <odometryFrame>krabby/odom</odometryFrame>
-      <robotBaseFrame>krabby/base_link</robotBaseFrame>
-      <publishOdomTF>true</publishOdomTF>
-      <!--<robotNamespace>krabby</robotNamespace>-->
-      <!--<ros>
-        <namespace>/krabby</namespace>
-      </ros>-->
+      <plugin
+        filename="gz-sim-diff-drive-system"
+        name="gz::sim::systems::DiffDrive">
+        <left_joint>left_wheel_hinge</left_joint>
+        <right_joint>right_wheel_hinge</right_joint>
+        <wheel_separation>${wheelYOffset * 2}</wheel_separation>
+        <wheel_radius>${wheelRadius}</wheel_radius>
+        <odom_publish_frequency>100</odom_publish_frequency>
+        <max_linear_acceleration>1</max_linear_acceleration>
+        <min_linear_acceleration>-1</min_linear_acceleration>
+        <max_angular_acceleration>50</max_angular_acceleration>
+        <min_angular_acceleration>-50</min_angular_acceleration>
+        <max_linear_velocity>1</max_linear_velocity>
+        <min_linear_velocity>-1</min_linear_velocity>
+        <max_angular_velocity>1</max_angular_velocity>
+        <min_angular_velocity>-1</min_angular_velocity>
 
-    </plugin>
+        <frame_id>odom</frame_id>
+        <child_frame_id>base_link</child_frame_id>
+        <topic>/krabby/cmd_vel</topic>
+        <odom_topic>/krabby/odom</odom_topic>
+      </plugin>
   </gazebo>
+  
+  <gazebo reference="ldlidar_top">
+    <sensor name='gpu_lidar' type='gpu_lidar'>
+      <topic>lidarObstacles</topic>
+      <update_rate>10</update_rate>
+      <lidar>
+        <scan>
+          <horizontal>
+            <samples>360</samples>
+            <resolution>1</resolution>
+            <min_angle>-3.14</min_angle>
+            <max_angle>3.14</max_angle>
+          </horizontal>
+          <vertical>
+            <samples>1</samples>
+            <resolution>1</resolution>
+            <min_angle>0</min_angle>
+            <max_angle>0</max_angle>
+          </vertical>
+        </scan>
+        <range>
+          <min>0.08</min>
+          <max>10.0</max>
+          <resolution>0.01</resolution>
+        </range>
+      </lidar>
+      <always_on>true</always_on>
+      <visualize>true</visualize>
+      <gz_frame_id>ldlidar_top</gz_frame_id>
+    </sensor>
+  </gazebo>
+
+  <gazebo reference="tim_lidar_bottom">
+    <sensor name='gpu_lidar_bottom' type='gpu_lidar'>
+      <topic>lidarLoc</topic>
+      <update_rate>10</update_rate>
+      <lidar>
+        <scan>
+          <horizontal>
+            <samples>360</samples>
+            <resolution>1</resolution>
+            <min_angle>-3.14</min_angle>
+            <max_angle>3.14</max_angle>
+          </horizontal>
+          <vertical>
+            <samples>1</samples>
+            <resolution>1</resolution>
+            <min_angle>0</min_angle>
+            <max_angle>0</max_angle>
+          </vertical>
+        </scan>
+        <range>
+          <min>0.08</min>
+          <max>10.0</max>
+          <resolution>0.01</resolution>
+        </range>
+      </lidar>
+      <always_on>true</always_on>
+      <visualize>true</visualize>
+      <gz_frame_id>tim_lidar_bottom</gz_frame_id>
+    </sensor>
+  </gazebo>
+
 
   <gazebo reference="camera_link">
     <material>Gazebo/Blue</material>
     <sensor type="camera" name="camera">
+      <always_on>true</always_on>
+      <visualize>true</visualize>
       <update_rate>5.0</update_rate>
+      <topic>camera/image_raw</topic>
+      <gz_frame_id>camera_rgb_frame</gz_frame_id>
       <camera name="head">
         <horizontal_fov>1.3962634</horizontal_fov>
         <image>
@@ -47,52 +113,6 @@
           <far>300</far>
         </clip>
       </camera>
-      <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
-        <alwaysOn>true</alwaysOn>
-        <updateRate>0.0</updateRate>
-        <robotNamespace>krabby</robotNamespace>
-        <cameraName>camera</cameraName>
-        <imageTopicName>image_raw</imageTopicName>
-        <cameraInfoTopicName>camera_info</cameraInfoTopicName>
-        <frameName>camera_link</frameName>
-        <hackBaseline>0.07</hackBaseline>
-        <distortionK1>0.0</distortionK1>
-        <distortionK2>0.0</distortionK2>
-        <distortionK3>0.0</distortionK3>
-        <distortionT1>0.0</distortionT1>
-        <distortionT2>0.0</distortionT2>
-      </plugin>
-    </sensor>
-  </gazebo>
-
-  <gazebo reference="tim_top">
-    <material>Gazebo/Black</material>
-    <sensor name="lidar_xv11" type="ray">
-      <ray>
-        <scan>
-          <horizontal>
-            <samples>360</samples>
-            <resolution>1</resolution>
-            <min_angle>0</min_angle>
-            <max_angle>6.28</max_angle>
-          </horizontal>
-        </scan>
-        <range>
-          <min>0.08</min>
-          <max>10</max>
-          <resolution>0.01</resolution>
-        </range>
-      </ray>
-      <plugin filename="libgazebo_ros_laser.so" name="ros_ray_sensor_controller">
-        <gaussianNoise>0.005</gaussianNoise>
-        <alwaysOn>true</alwaysOn>
-        <updateRate>10.0</updateRate>
-        <topicName>scan_obstacles</topicName>
-        <frameName>tim_top</frameName>
-        <interface name="ros_ray_sensor_iface" />
-        <robotNamespace>krabby</robotNamespace>
-      </plugin>
-      <visualize>true</visualize>
     </sensor>
   </gazebo>
 </robot>

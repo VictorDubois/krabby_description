@@ -25,6 +25,14 @@ This project uses [ROS](https://www.ros.org/), [Gazebo](http://gazebosim.org/) a
 
 Clone the project into your ROS workspace, then run ```catkin build```
 
+## To view the urdf in Rviz2
+
+```shell
+ros2 launch krabby_description display.launch.xml
+```
+```
+ros2 launch 
+```
 
 ## Usage
 To start the simulation with default parameter

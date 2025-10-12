@@ -1,0 +1,256 @@
+<sdf version='1.10'>
+  <world name='default'>
+    <gravity>0 0 -9.8000000000000007</gravity>
+    <magnetic_field>6.0000000000000002e-06 2.3e-05 -4.1999999999999998e-05</magnetic_field>
+    <atmosphere type='adiabatic' />
+    <physics type='ode'>
+      <max_step_size>0.002</max_step_size>
+      <real_time_factor>1</real_time_factor>
+      <real_time_update_rate>1000</real_time_update_rate>
+    </physics>
+    <scene>
+      <ambient>0.400000006 0.400000006 0.400000006 1</ambient>
+      <background>0.699999988 0.699999988 0.699999988 1</background>
+      <shadows>true</shadows>
+    </scene>
+    <audio>
+      <device>default</device>
+    </audio>
+    <wind />
+    <spherical_coordinates>
+      <surface_model>EARTH_WGS84</surface_model>
+      <latitude_deg>0</latitude_deg>
+      <longitude_deg>0</longitude_deg>
+      <elevation>0</elevation>
+      <heading_deg>0</heading_deg>
+    </spherical_coordinates>
+    <state world_name='default'>
+      <sim_time>1674 54000000</sim_time>
+      <real_time>255 894694991</real_time>
+      <wall_time>1700838315 768903318</wall_time>
+      <iterations>250845</iterations>
+      <light name='sun'>
+        <pose>0 0 10 0 0 0</pose>
+      </light>
+    </state>
+    <gui fullscreen='false'>
+      <camera name='user_camera'>
+        <pose>0.0 -3.8406899999999999 5.45038 1.6398205003468891e-17
+          0.56179699999999999 0.6921900000000001</pose>
+        <view_controller>orbit</view_controller>
+        <projection_type>perspective</projection_type>
+      </camera>
+    </gui>
+    <plugin name='gz::sim::systems::Physics' filename='gz-sim-physics-system' />
+    <plugin name='gz::sim::systems::Sensors' filename='gz-sim-sensors-system'>
+      <render_engine>ogre2</render_engine>
+    </plugin>
+    <plugin filename="gz-sim-imu-system"
+      name="gz::sim::systems::Imu">
+    </plugin>
+    <plugin name='gz::sim::systems::UserCommands' filename='gz-sim-user-commands-system' />
+    <plugin name='gz::sim::systems::SceneBroadcaster' filename='gz-sim-scene-broadcaster-system' />
+
+
+    <include>
+      <uri>model://Table2026</uri>
+      <name>Table_2026</name>
+      <pose>0 0 0 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://Caisse</uri>
+      <name>Caisse_milieu_jaune_0</name>
+      <pose>0.275 0.2 0.1 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://Caisse</uri>
+      <name>Caisse_milieu_jaune_1</name>
+      <pose>0.325 0.2 0.1 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://Caisse</uri>
+      <name>Caisse_milieu_jaune_2</name>
+      <pose>0.375 0.2 0.1 3.141592654 0 3.141592654</pose>
+    </include>
+    <include>
+      <uri>model://Caisse</uri>
+      <name>Caisse_milieu_jaune_3</name>
+      <pose>0.425 0.2 0.1 3.141592654 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://Caisse</uri>
+      <name>Caisse_nid_jaune_0</name>
+      <pose>1.325 -0.125 0.1 0 0 1.5707</pose>
+    </include>
+    <include>
+      <uri>model://Caisse</uri>
+      <name>Caisse_nid_jaune_1</name>
+      <pose>1.325 -0.175 0.1 3.141592654 0 1.5707</pose>
+    </include>
+    <include>
+      <uri>model://Caisse</uri>
+      <name>Caisse_nid_jaune_2</name>
+      <pose>1.325 -0.225 0.1 3.141592654 0 1.5707</pose>
+    </include>
+    <include>
+      <uri>model://Caisse</uri>
+      <name>Caisse_nid_jaune_3</name>
+      <pose>1.325 -0.275 0.1 0 0 1.5707</pose>
+    </include>
+
+    <include>
+      <uri>model://Caisse</uri>
+      <name>Caisse_coin_jaune_0</name>
+      <pose>1.325 0.525 0.1 0 0 1.5707</pose>
+    </include>
+    <include>
+      <uri>model://Caisse</uri>
+      <name>Caisse_coin_jaune_1</name>
+      <pose>1.325 0.575 0.1 3.141592654 0 1.5707</pose>
+    </include>
+    <include>
+      <uri>model://Caisse</uri>
+      <name>Caisse_coin_jaune_2</name>
+      <pose>1.325 0.625 0.1 3.141592654 0 1.5707</pose>
+    </include>
+    <include>
+      <uri>model://Caisse</uri>
+      <name>Caisse_coin_jaune_3</name>
+      <pose>1.325 0.675 0.1 0 0 1.5707</pose>
+    </include>
+
+
+    <include>
+      <uri>model://Caisse</uri>
+      <name>Caisse_public_jaune_0</name>
+      <pose>0.325 0.825 0.1 3.141592654 0 3.141592654</pose>
+    </include>
+    <include>
+      <uri>model://Caisse</uri>
+      <name>Caisse_public_jaune_1</name>
+      <pose>0.375 0.825 0.1 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://Caisse</uri>
+      <name>Caisse_public_jaune_2</name>
+      <pose>0.425 0.825 0.1 3.141592654 0 0</pose>
+    </include>
+    <include>
+      <uri>model://Caisse</uri>
+      <name>Caisse_public_jaune_3</name>
+      <pose>0.475 0.825 0.1 0 0 0</pose>
+    </include>
+
+
+
+
+        <include>
+      <uri>model://Caisse</uri>
+      <name>Caisse_milieu_bleu_0</name>
+      <pose>-0.275 0.2 0.1 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://Caisse</uri>
+      <name>Caisse_milieu_bleu_1</name>
+      <pose>-0.325 0.2 0.1 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://Caisse</uri>
+      <name>Caisse_milieu_bleu_2</name>
+      <pose>-0.375 0.2 0.1 3.141592654 0 0</pose>
+    </include>
+    <include>
+      <uri>model://Caisse</uri>
+      <name>Caisse_milieu_bleu_3</name>
+      <pose>-0.425 0.2 0.1 3.141592654 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://Caisse</uri>
+      <name>Caisse_nid_bleu_0</name>
+      <pose>-1.325 -0.125 0.1 0 0 1.5707</pose>
+    </include>
+    <include>
+      <uri>model://Caisse</uri>
+      <name>Caisse_nid_bleu_1</name>
+      <pose>-1.325 -0.175 0.1 3.141592654 0 1.5707</pose>
+    </include>
+    <include>
+      <uri>model://Caisse</uri>
+      <name>Caisse_nid_bleu_2</name>
+      <pose>-1.325 -0.225 0.1 3.141592654 0 1.5707</pose>
+    </include>
+    <include>
+      <uri>model://Caisse</uri>
+      <name>Caisse_nid_bleu_3</name>
+      <pose>-1.325 -0.275 0.1 0 0 1.5707</pose>
+    </include>
+
+    <include>
+      <uri>model://Caisse</uri>
+      <name>Caisse_coin_bleu_0</name>
+      <pose>-1.325 0.525 0.1 0 0 1.5707</pose>
+    </include>
+    <include>
+      <uri>model://Caisse</uri>
+      <name>Caisse_coin_bleu_1</name>
+      <pose>-1.325 0.575 0.1 3.141592654 0 1.5707</pose>
+    </include>
+    <include>
+      <uri>model://Caisse</uri>
+      <name>Caisse_coin_bleu_2</name>
+      <pose>-1.325 0.625 0.1 3.141592654 0 1.5707</pose>
+    </include>
+    <include>
+      <uri>model://Caisse</uri>
+      <name>Caisse_coin_bleu_3</name>
+      <pose>-1.325 0.675 0.1 0 0 1.5707</pose>
+    </include>
+
+
+    <include>
+      <uri>model://Caisse</uri>
+      <name>Caisse_public_bleu_0</name>
+      <pose>-0.325 0.825 0.1 3.141592654 0 0</pose>
+    </include>
+    <include>
+      <uri>model://Caisse</uri>
+      <name>Caisse_public_bleu_1</name>
+      <pose>-0.375 0.825 0.1 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://Caisse</uri>
+      <name>Caisse_public_bleu_2</name>
+      <pose>-0.425 0.825 0.1 3.141592654 0 0</pose>
+    </include>
+    <include>
+      <uri>model://Caisse</uri>
+      <name>Caisse_public_bleu_3</name>
+      <pose>-0.475 0.825 0.1 0 0 0</pose>
+    </include>
+
+
+
+    <light name='sun' type='directional'>
+      <pose>0 0 10 0 0 0</pose>
+      <cast_shadows>true</cast_shadows>
+      <intensity>1</intensity>
+      <direction>-0.5 0.10000000000000001 -0.90000000000000002</direction>
+      <diffuse>0.800000012 0.800000012 0.800000012 1</diffuse>
+      <specular>0.200000003 0.200000003 0.200000003 1</specular>
+      <attenuation>
+        <range>1000</range>
+        <linear>0.01</linear>
+        <constant>0.90000000000000002</constant>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <spot>
+        <inner_angle>0</inner_angle>
+        <outer_angle>0</outer_angle>
+        <falloff>0</falloff>
+      </spot>
+    </light>
+  </world>
+</sdf>
