@@ -6,41 +6,40 @@
 [![MIT License][license-shield]][license-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
-# krabby_description
+# krabi_description
 ![Eurobot2020 simulation running][product-screenshot]
-This project contains the urdf files describing the krabby robot, a robot participating to [Eurobot 2020](https://www.eurobot.org/eurobot/eurobot-2020) (Sail the world) robotics competition. The robot is actually two robots:
-### Campi Robot
-A camera mounted over the arena with a wide field of view
+This project contains the urdf files describing the krabi robot, a robot participating to [Eurobot 2026](https://www.eurobot.org/eurobot/eurobot-2026) (Sail the world) robotics competition.
 
-### Krabby Robot
-A mobile base with two wheels, a lidar and a camera
+### Krabi Robot
+A mobile base with two wheels, two lidars and a camera
 
 ## Prerequisites
-This project uses [ROS](https://www.ros.org/), [Gazebo](http://gazebosim.org/) and have a dependency on [eurobot2020](https://github.com/Scout22/eurobot2020_gazebo). It was tested with ROS Melodic and Gazebo v9.15 on Linux, but should work with more recent versions. 
-* [How to install ROS](http://wiki.ros.org/melodic/Installation) 
-* [How to install Gazebo](http://gazebosim.org/tutorials?cat=install)
+This project uses [ROS 2](https://www.ros.org/) and [Gazebo](http://gazebosim.org/). It was tested with ROS 2 Jazzy and Gazebo Harmonic, on Ubuntu 24.04. 
+* [How to install ROS 2](http://wiki.ros.org/melodic/Installation](https://docs.ros.org/en/jazzy/Installation.html)) 
+* [How to install Gazebo](https://gazebosim.org/docs/harmonic/install/)
 
 
 ## Installation
 
-Clone the project into your ROS workspace, then run ```catkin build```
+Clone the project into your ROS workspace, then run ```colcon build --symlink-install```
 
 ## To view the urdf in Rviz2
 
 ```shell
 ros2 launch krabby_description display.launch.xml
 ```
-```
-ros2 launch 
-```
 
 ## Usage
 To start the simulation with default parameter
 
 ```bash
-roslaunch krabby_description krabby_simulation.launch
+ros2 launch krabby_description spawn_world.py
 ```
+For the simulation with game elements (caisses)
 
+```bash
+ros2 launch krabby_description spawn_world.py world:=table2026Full.world
+```
 
 ## Roadmap
 See the open issues for a list of proposed features (and known issues).
