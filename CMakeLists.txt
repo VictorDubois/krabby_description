@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-project(krabby_description)
+project(krabi_description)
 
 find_package(ament_cmake REQUIRED)
 
@@ -19,6 +19,9 @@ install(DIRECTORY urdf params
   DESTINATION share/${PROJECT_NAME})
 
 install(DIRECTORY models params
+  DESTINATION share/${PROJECT_NAME})
+
+install(DIRECTORY worlds params
   DESTINATION share/${PROJECT_NAME})
 
 #ament_environment_hooks("${CMAKE_CURRENT_SOURCE_DIR}/env-hooks/env_variables.bash")

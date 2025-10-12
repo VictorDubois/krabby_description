@@ -20,6 +20,8 @@ def get_robot_description_string(pkg):
 def generate_launch_description():
     pkg = get_package_share_directory("krabby_description")
 
+    
+
     isBlue_value = LaunchConfiguration('isBlue')
     xRobotPos_value = LaunchConfiguration('xRobotPos')
     yRobotPos_value = LaunchConfiguration('yRobotPos')
@@ -45,6 +47,12 @@ def generate_launch_description():
     robot_desc = get_robot_description_string(pkg)
     bridge_config_file = os.path.join(pkg, "params", "gz_bridge.yaml")
 
+    # Set gazebo environment variables
+    pkg_share_dir = pkg
+    models_path = pkg_share_dir + "/models"
+    worlds_path = pkg_share_dir + "/worlds"
+    os.environ['GZ_SIM_RESOURCE_PATH'] = models_path + ":" + worlds_path
+
     ros_gz_spawn = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             [PathJoinSubstitution([FindPackageShare('ros_gz_sim'),
@@ -61,7 +69,7 @@ def generate_launch_description():
         ])
 
 
-    krabby_state_pub_node = Node(
+    krabi_state_pub_node = Node(
         package='robot_state_publisher',
         executable='robot_state_publisher',
         name='robot_state_publisher',
@@ -69,6 +77,6 @@ def generate_launch_description():
         parameters=[{'use_sim_time': True, "robot_description": robot_desc}]
     )
 
-    ld = launch.LaunchDescription([krabby_state_pub_node])
+    ld = launch.LaunchDescription([krabi_state_pub_node])
     ld.add_action(ros_gz_spawn)
     return ld

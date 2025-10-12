@@ -1,6 +1,0 @@
-<launch>
-  <include file="$(find-pkg-share urdf_launch)/launch/display.launch.py">
-    <arg name="urdf_package" value="krabby_description"/>
-    <arg name="urdf_package_path" value="urdf/krabby.xacro"/>
-  </include>
-</launch>
