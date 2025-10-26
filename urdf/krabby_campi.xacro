@@ -5,9 +5,9 @@
   <xacro:property name="cameraSize" value="0.05"/>
   <xacro:property name="cameraMass" value="0.1"/>
 
-  <xacro:include filename="$(find krabby_description)/urdf/krabby_campi.gazebo"/>
-  <xacro:include filename="$(find krabby_description)/urdf/materials.xacro"/>
-  <xacro:include filename="$(find krabby_description)/urdf/macros.xacro"/>
+  <xacro:include filename="$(find krabi_description)/urdf/krabby_campi.gazebo"/>
+  <xacro:include filename="$(find krabi_description)/urdf/materials.xacro"/>
+  <xacro:include filename="$(find krabi_description)/urdf/macros.xacro"/>
 
   <link name="camera_campi_link">
     <collision>

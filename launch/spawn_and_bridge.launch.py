@@ -18,9 +18,7 @@ def get_robot_description_string(pkg):
 
 
 def generate_launch_description():
-    pkg = get_package_share_directory("krabby_description")
-
-    
+    pkg = get_package_share_directory("krabi_description")
 
     isBlue_value = LaunchConfiguration('isBlue')
     xRobotPos_value = LaunchConfiguration('xRobotPos')
