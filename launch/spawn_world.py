@@ -13,7 +13,7 @@ from launch.actions import ExecuteProcess
 
 
 def generate_launch_description():
-    pkg = get_package_share_directory("krabby_description")
+    pkg = get_package_share_directory("krabi_description")
 
     
 
