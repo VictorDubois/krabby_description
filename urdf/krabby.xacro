@@ -177,7 +177,7 @@
   </link>
 
   <joint name="camera_joint" type="fixed">
-    <origin xyz="${-cameraSize+chassisLength/2} 0 ${cameraSize+wheelRadius+cameraSize/2}" rpy="0 0 0"/>
+    <origin xyz="0 ${chassisLength/2+0.05} 0.3" rpy="0 1.57 1.57"/>
     <parent link="chassis"/>
     <child link="camera_link"/>
   </joint>
