@@ -41,14 +41,14 @@
   direction: GZ_TO_ROS
 
 - gz_topic_name: "/camera/image_raw"
-  ros_topic_name: "/krabi_ns/krabi_cam_raw"
+  ros_topic_name: "/krabi_ns/krabi_cam/image_raw"
   gz_type_name: "gz.msgs.Image"
   ros_type_name: "sensor_msgs/msg/Image"
   direction: GZ_TO_ROS
 
 # gz topic published by Sensors plugin (Camera)
 - gz_topic_name: "camera/camera_info"
-  ros_topic_name: "/krabi_ns/krabi_camera_info"
+  ros_topic_name: "/krabi_ns/krabi_cam/camera_info"
   gz_type_name: "gz.msgs.CameraInfo"
   ros_type_name: "sensor_msgs/msg/CameraInfo"
   direction: GZ_TO_ROS
