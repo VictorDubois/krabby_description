@@ -50,7 +50,7 @@ def generate_launch_description():
     worlds_path = pkg_share_dir + "/worlds"
     os.environ['GZ_SIM_RESOURCE_PATH'] = models_path + ":" + worlds_path
 
-    gz_proc = ExecuteProcess(cmd=['gz', 'sim', world_value, '-v', '-r'], output='screen')
+    gz_proc = ExecuteProcess(cmd=['gz', 'sim', world_value, '-v', '-r', "-s", "--headless-rendering"], output='screen')
 
 
     ld = launch.LaunchDescription([world_launch_arg])
