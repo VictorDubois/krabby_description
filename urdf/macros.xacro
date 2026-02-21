@@ -19,7 +19,7 @@
             <collision>
                 <origin xyz="0 0 0" rpy="0 ${PI/2} ${PI/2}"/>
                 <geometry>
-                    <cylinder length="${wheelWidth}" radius="${wheelRadius}"/>
+                     <sphere radius="${wheelRadius}" />
                 </geometry>
             </collision>
 
@@ -102,8 +102,8 @@
             <child link="${name}"/>
         </joint>
         <gazebo reference="${name}">
-            <mu1>0.01</mu1>
-            <mu2>0.01</mu2>
+            <mu1>0.0</mu1>
+            <mu2>0.0</mu2>
             <material>Gazebo/Red</material>
         </gazebo>
     </xacro:macro>
