@@ -1,3 +1,9 @@
+- gz_topic_name: "/clock"
+  ros_topic_name: "/clock"
+  gz_type_name: "gz.msgs.Clock"
+  ros_type_name: "rosgraph_msgs/msg/Clock"
+  direction: GZ_TO_ROS
+
 - gz_topic_name: "/krabby/cmd_vel"
   ros_topic_name: "/krabi_ns/cmd_vel"
   gz_type_name: "gz.msgs.Twist"
