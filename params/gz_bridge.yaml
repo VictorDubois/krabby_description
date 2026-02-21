@@ -11,7 +11,7 @@
   direction: ROS_TO_GZ
 
 - gz_topic_name: "/krabby/odom"
-  ros_topic_name: "/krabi_ns/odom"
+  ros_topic_name: "/krabi_ns/odom_simu"
   gz_type_name: "gz.msgs.Odometry"
   ros_type_name: "nav_msgs/msg/Odometry"
   direction: GZ_TO_ROS
