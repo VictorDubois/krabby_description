@@ -9,7 +9,7 @@ import os
 from launch_ros.actions import Node, PushRosNamespace
 from launch.substitutions import Command, LaunchConfiguration, PythonExpression
 from launch.actions import ExecuteProcess
-
+from launch.conditions import IfCondition, UnlessCondition
 
 
 def generate_launch_description():
@@ -22,6 +22,7 @@ def generate_launch_description():
     yRobotPos_value = LaunchConfiguration('yRobotPos')
     zRobotOrientation_value = LaunchConfiguration('zRobotOrientation')
     world_value = LaunchConfiguration('world')
+    gui_value = LaunchConfiguration('gui')
   
     isBlue_launch_arg = DeclareLaunchArgument(
         'isBlue',
@@ -44,15 +45,33 @@ def generate_launch_description():
         default_value='table2026.world'
     )
 
+    gui_launch_arg = DeclareLaunchArgument(
+        'gui',
+        default_value='true',
+        description='Run with GUI (true) or headless (false)'
+    )
+
     # Set gazebo environment variables
     pkg_share_dir = get_package_share_directory('krabi_description')
     models_path = pkg_share_dir + "/models"
     worlds_path = pkg_share_dir + "/worlds"
     os.environ['GZ_SIM_RESOURCE_PATH'] = models_path + ":" + worlds_path
 
-    gz_proc = ExecuteProcess(cmd=['gz', 'sim', world_value, '-v', '-r', "-s", "--headless-rendering"], output='screen')
+    # GUI version
+    gz_gui = ExecuteProcess(
+        cmd=['gz', 'sim', world_value, '-v', '-r'],
+        output='screen',
+        condition=IfCondition(gui_value)
+    )
 
+    # Headless version
+    gz_headless = ExecuteProcess(
+        cmd=['gz', 'sim', world_value, '-v', '-r', '-s', '--headless-rendering'],
+        output='screen',
+        condition=UnlessCondition(gui_value)
+    )
 
-    ld = launch.LaunchDescription([world_launch_arg])
-    ld.add_action(gz_proc)
+    ld = launch.LaunchDescription([world_launch_arg, gui_launch_arg])
+    ld.add_action(gz_gui)
+    ld.add_action(gz_headless)
     return ld
