@@ -26,7 +26,7 @@
   <!-- wheels -->
   <xacro:property name="wheelWidth" value="0.008"/>
   <xacro:property name="wheelRadius" value="0.030"/>
-  <xacro:property name="wheelXOffset" value="-0.018"/>
+  <xacro:property name="wheelXOffset" value="-0.0"/>
   <xacro:property name="wheelYOffset" value="0.062"/>
   <xacro:property name="wheelZOffset" value="0.025"/>
   <xacro:property name="wheelMass" value="0.02"/>
