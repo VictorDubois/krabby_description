@@ -75,6 +75,18 @@ def generate_launch_description():
         parameters=[{'use_sim_time': True, "robot_description": robot_desc}]
     )
 
-    ld = launch.LaunchDescription([krabi_state_pub_node])
+    image_transport_node = Node(
+        package='image_transport',
+        executable='republish',
+        name='cam_republish',
+        arguments=['raw', 'compressed'],
+        remappings=[
+            ('in',  '/krabi_ns/krabi_cam_simu/image_raw'),
+            ('out/compressed', '/krabi_ns/krabi_cam/image_raw/compressed'),
+        ],
+    )
+
+
+    ld = launch.LaunchDescription([krabi_state_pub_node, image_transport_node])
     ld.add_action(ros_gz_spawn)
     return ld

@@ -47,7 +47,7 @@
   direction: GZ_TO_ROS
 
 - gz_topic_name: "/camera/image_raw"
-  ros_topic_name: "/krabi_ns/krabi_cam/image_raw"
+  ros_topic_name: "/krabi_ns/krabi_cam_simu/image_raw"
   gz_type_name: "gz.msgs.Image"
   ros_type_name: "sensor_msgs/msg/Image"
   direction: GZ_TO_ROS
