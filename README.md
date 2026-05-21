@@ -15,7 +15,7 @@ A mobile base with two wheels, two lidars and a camera
 
 ## Prerequisites
 This project uses [ROS 2](https://www.ros.org/) and [Gazebo](http://gazebosim.org/). It was tested with ROS 2 Jazzy and Gazebo Harmonic, on Ubuntu 24.04. 
-* [How to install ROS 2](http://wiki.ros.org/melodic/Installation](https://docs.ros.org/en/jazzy/Installation.html)) 
+* [How to install ROS 2 (ideally: Ubuntu (deb packages))](https://docs.ros.org/en/jazzy/Installation.html) 
 * [How to install Gazebo](https://gazebosim.org/docs/harmonic/install/)
 
 
