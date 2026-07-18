@@ -250,5 +250,36 @@
     <child link="tim_lidar_bottom"/>
   </joint>
 
+  <!-- ************************************************************** -->
+  <!-- IMU                                                            -->
+  <!-- ************************************************************** -->
+
+  <link name="imu_link"> 
+        <visual>
+            <geometry>
+                <box size="0.1 0.1 0.1" />
+            </geometry>
+            <material name="Cyan">
+                <color rgba="0 1.0 1.0 1.0" />
+            </material>
+        </visual>
+
+        <collision>
+            <geometry>
+                <box size="0.1 0.1 0.1" />
+            </geometry>
+        </collision>
+
+        <inertial>
+            <mass value=".1" />
+            <inertia ixx="0.145833" ixy="0.0" ixz="0.0" iyy="0.145833" iyz="0.0" izz="0.125" />
+        </inertial>
+    </link>
+
+    <joint name="imu_joint" type="fixed">
+       <parent link="base_link" />
+       <child link="imu_link" />
+       <origin xyz="0 0 ${bodyHeight/2}" />
+   </joint>
 
 </robot>

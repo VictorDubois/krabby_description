@@ -58,3 +58,9 @@
   gz_type_name: "gz.msgs.CameraInfo"
   ros_type_name: "sensor_msgs/msg/CameraInfo"
   direction: GZ_TO_ROS
+
+- gz_topic_name: "imu"
+  ros_topic_name: "/krabi_ns/imu"
+  gz_type_name: "gz.msgs.IMU"
+  ros_type_name: "sensor_msgs/msg/Imu"
+  direction: GZ_TO_ROS
