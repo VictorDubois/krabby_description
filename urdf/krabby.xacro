@@ -57,7 +57,7 @@
         <!--<origin xyz="0 ${chassisWidth}/2 ${chassisDistanceAuSol}" rpy="0 0 0"/>-->
         <!--<mesh><uri>file://Kraboss_base_assembly_For_Simu_v1.stl</uri></mesh>-->
         <!--<pose>0 ${chassisWidth}/2 0 0 -0 0</pose>-->
-        <mesh scale="0.001 0.001 0.001" filename="file://$(find krabi_description)/models/Kraboss_base_assembly_For_Simu_v1.stl"/>
+        <mesh scale="0.001 0.001 0.001" filename="file://$(find krabi_description)/models/Kraboss_base_assembly_For_Simu_2026_v2.stl"/>
         <!--<mesh scale="0.001 0.001 0.001" filename="file://$(find krabi_description)/models/Kraboss_base_assembly_For_Simu_v1.dae"/>-->
         <!--<box size="${bodyLength} ${bodyWidth} ${bodyHeight}"/>-->
       </geometry>
@@ -177,7 +177,7 @@
   </link>
 
   <joint name="camera_joint" type="fixed">
-    <origin xyz="0 -${chassisLength/2+0.05} 0.3" rpy="0 1.57 -1.57"/>
+    <origin xyz="0 -${chassisLength/2+0.08} 0.25" rpy="0 1.57 -1.57"/>
     <parent link="chassis"/>
     <child link="camera_link"/>
   </joint>
