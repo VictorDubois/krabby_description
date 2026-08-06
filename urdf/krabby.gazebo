@@ -70,8 +70,13 @@
           <horizontal>
             <samples>360</samples>
             <resolution>1</resolution>
+            <!-- Real FoV but harder on localisation, ~200° view-->
             <min_angle>-2.18</min_angle>
             <max_angle>1.77</max_angle>
+
+            <!-- easy but not realistic, 360° view-->
+            <!--<min_angle>-3.14</min_angle>
+            <max_angle>3.14</max_angle>-->
           </horizontal>
           <vertical>
             <samples>1</samples>
