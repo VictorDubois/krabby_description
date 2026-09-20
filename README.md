@@ -7,8 +7,10 @@
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
 # krabi_description
-![Eurobot2020 simulation running][product-screenshot]
-This project contains the urdf files describing the krabi robot, a robot participating to [Eurobot 2026](https://www.eurobot.org/eurobot/eurobot-2026) (Sail the world) robotics competition.
+
+<img width="868" height="637" alt="image" src="https://github.com/user-attachments/assets/607d036c-9bfc-47ba-a3d6-04611b0c6f1e" />
+
+This project contains the urdf files describing the krabi robot, a robot participating to [Eurobot 2026](https://www.eurobot.org/eurobot/eurobot-2026) (Winter is Coming) robotics competition.
 
 ### Krabi Robot
 A mobile base with two wheels, two lidars and a camera
@@ -48,6 +50,16 @@ See the open issues for a list of proposed features (and known issues).
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 Please make sure to update tests as appropriate.
+
+## What to do for a new year/rules
+- Model the table and the elements, and add them to the "models" folder.
+  - The .sdf file describes an object: its visual appearance, how it collides (mecanical shape), etc. [More info here](https://medium.com/@14sohaibbk97/get-started-with-robotic-simulations-using-ros2-and-gazebo-part-1-59e4d5d04b88#:~:text=of%20defining%20an-,SDF%20Model%20in%20Gazebo,-%2C%20usually%20it%20comprises). Note: I usually copy-paste an existing model, and modify it (I don't really know what I'm doing :p)
+  - If the geometry is really simple, you can directly describe it in the .sdf file. Ex: [2025's Planks are just rectangles](https://github.com/VictorDubois/krabby_description/blob/main/models/Plank/model.sdf#L46)
+  - If it is more complex, you can model them in Blender, and export them as .dae. Ex: [All the tables](https://github.com/VictorDubois/krabby_description/blob/main/models/Table2026/model.sdf#L38). The 3D model is used both for visuals AND for the collision. Warning: the option to export .dae has been removed from new versions of Blender! I keep an old version for this purpose. Other software are probably as good.
+- You can create the .world for the new year. Usually I make two:
+  - One with the table and all the game elements (in 2026 it was needed to test the color detection algorithm to detect the caisses)
+  - One with just the table, no game elements => the simulation is far less CPU-intensive, and most tests do not require the game elements
+- If the shape of the robot changes, you can update [its properties](https://github.com/VictorDubois/krabby_description/blob/main/urdf/properties.xacro) (but not everything is in this file).
 
 ## License
 Distributed under the [MIT](https://choosealicense.com/licenses/mit/) License. See `LICENSE` for more information.
