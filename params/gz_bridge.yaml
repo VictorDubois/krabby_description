@@ -10,16 +10,13 @@
   ros_type_name: "geometry_msgs/msg/Twist"
   direction: ROS_TO_GZ
 
-- gz_topic_name: "/krabby/odom"
-  ros_topic_name: "/krabi_ns/odom_simu"
+# Odométrie : l'odom du DiffDrive (/krabby/odom, /model/krabby/tf) n'est plus bridgée, car
+# elle intègre le patinage des roues motrices. sim_odometry.py publie odom->base_link et
+# odom_simu à partir de la pose réelle (comme les roues codeuses du vrai robot).
+- gz_topic_name: "/krabby/ground_truth"
+  ros_topic_name: "/krabi_ns/odom_ground_truth"
   gz_type_name: "gz.msgs.Odometry"
   ros_type_name: "nav_msgs/msg/Odometry"
-  direction: GZ_TO_ROS
-
-- gz_topic_name: "/model/krabby/tf"
-  ros_topic_name: "/tf"
-  gz_type_name: "gz.msgs.Pose_V"
-  ros_type_name: "tf2_msgs/msg/TFMessage"
   direction: GZ_TO_ROS
 
 - gz_topic_name: "/lidarObstacles"

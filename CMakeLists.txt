@@ -25,4 +25,8 @@ install(DIRECTORY worlds params
   DESTINATION share/${PROJECT_NAME})
 
 #ament_environment_hooks("${CMAKE_CURRENT_SOURCE_DIR}/env-hooks/env_variables.bash")
+# Odométrie simulée "roues codeuses"
+install(PROGRAMS scripts/sim_odometry.py
+  DESTINATION lib/${PROJECT_NAME})
+
 ament_package()

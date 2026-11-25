@@ -28,6 +28,18 @@
         <topic>/krabby/cmd_vel</topic>
         <odom_topic>/krabby/odom</odom_topic>
       </plugin>
+      <!-- Pose réelle du châssis (repère monde = map). Sert d'entrée à sim_odometry.py qui
+           simule les roues codeuses ; l'odom du DiffDrive n'est plus bridgée vers ROS. -->
+      <plugin
+        filename="gz-sim-odometry-publisher-system"
+        name="gz::sim::systems::OdometryPublisher">
+        <odom_frame>map</odom_frame>
+        <robot_base_frame>base_link</robot_base_frame>
+        <odom_publish_frequency>100</odom_publish_frequency>
+        <odom_topic>/krabby/ground_truth</odom_topic>
+        <tf_topic>/krabby/ground_truth_tf</tf_topic>
+        <dimensions>2</dimensions>
+      </plugin>
   </gazebo>
   
   <gazebo reference="ldlidar_top">

@@ -87,6 +87,14 @@ def generate_launch_description():
     )
 
 
-    ld = launch.LaunchDescription([krabi_state_pub_node, image_transport_node])
+    sim_odometry_node = Node(
+        package='krabi_description',
+        executable='sim_odometry.py',
+        namespace='krabi_ns',
+        output='screen',
+        parameters=[{'use_sim_time': True}]
+    )
+
+    ld = launch.LaunchDescription([krabi_state_pub_node, image_transport_node, sim_odometry_node])
     ld.add_action(ros_gz_spawn)
     return ld
